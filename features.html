@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - RelayBill User Guide</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <meta name="description" content="Comprehensive guide to RelayBill's core features: Customer management, Alerts system, and Profile settings.">
+</head>
+<body>
+    <div id="header-container"></div>
+    <main class="main-content">
+        <div class="container">
+            <div id="page-header" class="mb-4"></div>
+            <section class="mb-5" id="customers">
+                <div id="customer-header" class="mb-4"></div>
+                <div class="card mb-4" id="customer-main-card"></div>
+                <div id="customer-form-header" class="mb-4"></div>
+                <div class="grid grid-3" id="customer-form-sections"></div>
+            </section>
+            <section class="mb-5" id="alerts">
+                <div id="alerts-header" class="mb-4"></div>
+                <div class="card mb-4" id="alerts-main-card"></div>
+                <div class="grid grid-2" id="alerts-actions"></div>
+            </section>
+            <section class="mb-5" id="profile">
+                <div id="profile-header" class="mb-4"></div>
+                <div class="grid grid-2 mb-4" id="profile-features"></div>
+                <div id="theme-section" class="mb-4"></div>
+                <div id="sms-toggle-banner"></div>
+            </section>
+        </div>
+    </main>
+    <div id="footer-container"></div>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageHeader = ui.createSectionHeader(
+                'App Screens Guide',
+                'What you see and how to use each screen',
+                'smartphone'
+            );
+            document.getElementById('page-header').appendChild(pageHeader);
+            const customerHeader = ui.createSectionHeader(
+                'Customer Screen - Your Main Workspace',
+                'View, search, filter, add, and edit customers',
+                'group'
+            );
+            document.getElementById('customer-header').appendChild(customerHeader);
+            const customerMainCard = document.getElementById('customer-main-card');
+            customerMainCard.innerHTML = `
+                <div style="display: flex; align-items: flex-start; gap: 1.5rem;">
+                    <div class="icon-box" style="background: var(--primary-container); flex-shrink: 0;">
+                        <span class="material-symbols-rounded" style="color: var(--primary); font-size: 28px;">dashboard</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="margin: 0 0 1rem 0; color: var(--primary);">What You See Here</h3>
+                        <p style="margin-bottom: 1.5rem; color: var(--on-surface-variant);">A list of all your customers with their names, phone numbers, package details, and expiration dates. Each customer shows their current status (Active, Terminated, etc.).</p>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--primary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--primary); font-size: 20px;">search</span>
+                                <div>
+                                    <strong style="color: var(--primary);">Search:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Use the search bar at the top to quickly find a customer by name</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--secondary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--secondary); font-size: 20px;">tune</span>
+                                <div>
+                                    <strong style="color: var(--secondary);">Filter:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Tap the filter icon to show customers by status: All, Active, Terminated, or Inactive on Expiry</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--tertiary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--tertiary); font-size: 20px;">add_circle</span>
+                                <div>
+                                    <strong style="color: var(--tertiary);">Add Customer:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Tap the blue floating + button (bottom right) to open the Add Customer screen with empty form fields</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--success-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--success); font-size: 20px;">edit</span>
+                                <div>
+                                    <strong style="color: var(--success);">Edit Customer:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Tap the tonal edit button (with the pencil icon) on the customer card to open the Edit Customer screen with pre-filled form fields</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--error-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--error); font-size: 20px;">delete</span>
+                                <div>
+                                    <strong style="color: var(--error);">Delete Customer:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">On each customer card, tap the red delete button (trash icon). A confirmation dialog appears asking "Are you sure you want to delete [Customer Name]? This action cannot be undone and all customer data will be permanently removed." Tap "Delete" to confirm or "Cancel" to abort</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--info-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--info); font-size: 20px;">refresh</span>
+                                <div>
+                                    <strong style="color: var(--info);">Auto-Refresh List:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">After adding, editing, or deleting a customer, the list automatically updates to show your changes when you return to the Customer screen</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--warning-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--warning); font-size: 20px;">swipe_down</span>
+                                <div>
+                                    <strong style="color: var(--warning);">Manual Refresh:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Swipe down from the top of the customer list to manually refresh. A loading spinner appears while fetching the latest data from the server</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            const customerFormHeader = ui.createSectionHeader(
+                'Add Customer & Edit Customer Screens',
+                'What fields you fill out and why they matter',
+                'person_add'
+            );
+            document.getElementById('customer-form-header').appendChild(customerFormHeader);
+            const customerFormSections = document.getElementById('customer-form-sections');
+            const formSections = [
+                {
+                    icon: 'person',
+                    title: 'Personal Information',
+                    items: [
+                        { icon: 'badge', field: 'Full Name', description: 'REQUIRED: The customer\'s full name (appears in SMS messages). Cannot be left blank' },
+                        { icon: 'account_circle', field: 'Username', description: 'REQUIRED: Unique customer ID displayed in the customer list. System prevents duplicate usernames' },
+                        { icon: 'phone', field: 'Phone Number', description: 'REQUIRED: 11-digit mobile number starting with \'0\' (e.g., 03001234567). Cannot be left blank' },
+                        { icon: 'home', field: 'Address', description: 'REQUIRED: The customer\'s physical address. Cannot be left blank' }
+                    ],
+                    variant: 'primary'
+                },
+                {
+                    icon: 'wifi',
+                    title: 'Internet Package',
+                    items: [
+                        { icon: 'speed', field: 'Internet Package', description: 'Select the customer\'s subscription package from dropdown' },
+                        { icon: 'toggle_on', field: 'Status', description: 'Set current status (Active, Terminated, Inactive on Expiry)' }
+                    ],
+                    variant: 'secondary'
+                },
+                {
+                    icon: 'calendar_today',
+                    title: 'Service Dates',
+                    items: [
+                        { icon: 'event_available', field: 'Joining Date', description: 'REQUIRED: The date the customer\'s service started. Cannot be left blank' },
+                        { icon: 'event_busy', field: 'Expiration Date', description: 'REQUIRED & CRITICAL: Date subscription expires (drives SMS reminders). Cannot be left blank' },
+                        { icon: 'event_repeat', field: 'Termination Date', description: 'Optional: Date service was permanently terminated' }
+                    ],
+                    variant: 'tertiary'
+                }
+            ];
+            formSections.forEach(section => {
+                const sectionCard = document.createElement('div');
+                sectionCard.className = 'card';
+                const itemsHtml = section.items.map(item => `
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; background: var(--surface-variant); border-radius: 6px;">
+                        <span class="material-symbols-rounded" style="color: var(--${section.variant}); font-size: 18px; margin-top: 2px;">${item.icon}</span>
+                        <div>
+                            <strong style="color: var(--${section.variant}); font-size: 0.9rem;">${item.field}:</strong>
+                            <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem; line-height: 1.4;">${item.description}</div>
+                        </div>
+                    </div>
+                `).join('');
+                sectionCard.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+                        <div class="icon-box" style="width: 40px; height: 40px; background: var(--${section.variant}-container);">
+                            <span class="material-symbols-rounded" style="color: var(--${section.variant}); font-size: 20px;">${section.icon}</span>
+                        </div>
+                        <h3 style="margin: 0; color: var(--${section.variant});">${section.title}</h3>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        ${itemsHtml}
+                    </div>
+                `;
+                customerFormSections.appendChild(sectionCard);
+            });
+            const alertsHeader = ui.createSectionHeader(
+                'Failed SMS Screen (Alerts) - Your Troubleshooting Center',
+                'See which reminders failed and why, then fix them',
+                'sms_failed'
+            );
+            document.getElementById('alerts-header').appendChild(alertsHeader);
+            const alertsMainCard = document.getElementById('alerts-main-card');
+            alertsMainCard.innerHTML = `
+                <div style="display: flex; align-items: flex-start; gap: 1.5rem;">
+                    <div class="icon-box" style="background: var(--warning-container); flex-shrink: 0;">
+                        <span class="material-symbols-rounded" style="color: var(--warning); font-size: 28px;">warning</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="margin: 0 0 1rem 0; color: var(--warning);">What You See Here</h3>
+                        <p style="margin-bottom: 1.5rem; color: var(--on-surface-variant);">A list of SMS reminders that couldn't be sent. Each failed SMS shows the customer name, phone number, failure reason, and when it failed. This is your action list. Notifications for failed SMS now take you directly to this screen.</p>
+                        <div style="padding: 1rem; background: var(--info-container); border-radius: 8px; border-left: 4px solid var(--info); margin-bottom: 1.5rem;">
+                            <h4 style="margin: 0 0 0.5rem 0; color: var(--info); display: flex; align-items: center; gap: 0.5rem;">
+                                <span class="material-symbols-rounded" style="font-size: 18px;">info</span>
+                                Alert Information
+                            </h4>
+                            <p style="margin: 0; font-size: 0.875rem; color: var(--on-surface-variant);">Each item provides: Customer Name & Phone, Failure Reason, and the date/time the failure occurred. Tap notifications for failed SMS to navigate directly here.</p>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: var(--error-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--error); font-size: 18px;">person</span>
+                                <span style="color: var(--on-surface-variant); font-size: 0.875rem;"><strong>Customer Info:</strong> Name and phone number</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: var(--error-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--error); font-size: 18px;">error_outline</span>
+                                <span style="color: var(--on-surface-variant); font-size: 0.875rem;"><strong>Failure Reason:</strong> User-friendly explanation of why the SMS failed (e.g., "No service available")</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: var(--error-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--error); font-size: 18px;">schedule</span>
+                                <span style="color: var(--on-surface-variant); font-size: 0.875rem;"><strong>Failed On:</strong> Date and time of the failure</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            const alertsActions = document.getElementById('alerts-actions');
+            const alertActions = [
+                {
+                    icon: 'refresh',
+                    title: 'Retry Action',
+                    content: 'After fixing the underlying issue (e.g., turning off airplane mode, granting permissions), tap the blue <strong>Retry</strong> button next to the failed SMS entry. The app will immediately attempt to send the SMS again. If successful, the alert disappears from the list automatically.',
+                    variant: 'success'
+                },
+                {
+                    icon: 'visibility_off',
+                    title: 'Ignore Action',
+                    content: 'If you have already contacted the customer manually or the reminder is no longer relevant, tap the red <strong>Ignore</strong> button next to the failed SMS entry. This will permanently remove the alert from the list without sending the SMS.',
+                    variant: 'warning'
+                }
+            ];
+            alertActions.forEach(action => {
+                const actionCard = ui.createInfoCard(
+                    action.icon,
+                    action.title,
+                    action.content,
+                    action.variant
+                );
+                alertsActions.appendChild(actionCard);
+            });
+            const themeSection = document.getElementById('theme-section');
+            const themeCard = document.createElement('div');
+            themeCard.className = 'card';
+            themeCard.innerHTML = `
+                <div style="display: flex; align-items: flex-start; gap: 1.5rem;">
+                    <div class="icon-box" style="background: var(--tertiary-container); flex-shrink: 0;">
+                        <span class="material-symbols-rounded" style="color: var(--tertiary); font-size: 28px;">palette</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="margin: 0 0 1rem 0; color: var(--tertiary);">App Theme Customization</h3>
+                        <p style="margin-bottom: 1.5rem; color: var(--on-surface-variant);">New Appearance section in Profile allows you to customize the app's visual theme. Choose between Light, Dark, or System Default themes with persistent settings.</p>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--primary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--primary); font-size: 20px;">light_mode</span>
+                                <div>
+                                    <strong style="color: var(--primary);">Light Theme:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Clean, bright interface with light backgrounds - ideal for daytime use and well-lit environments</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--secondary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--secondary); font-size: 20px;">dark_mode</span>
+                                <div>
+                                    <strong style="color: var(--secondary);">Dark Theme:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Elegant dark interface that reduces eye strain in low-light conditions and saves battery on OLED screens</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--tertiary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--tertiary); font-size: 20px;">settings_brightness</span>
+                                <div>
+                                    <strong style="color: var(--tertiary);">System Default (Recommended):</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Automatically follows your device's system theme setting - switches between light and dark based on your phone's preferences or time of day</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--success-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--success); font-size: 20px;">save</span>
+                                <div>
+                                    <strong style="color: var(--success);">Theme Persistence:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Your selected theme is automatically saved and applied every time you open the app - no need to set it again</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding: 1rem; background: var(--info-container); border-radius: 8px; border-left: 4px solid var(--info); margin-top: 1.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <span class="material-symbols-rounded" style="color: var(--info); font-size: 18px;">touch_app</span>
+                                <strong style="color: var(--info);">How to Change Theme</strong>
+                            </div>
+                            <p style="margin: 0; font-size: 0.875rem; color: var(--on-surface-variant);">Go to Profile screen → Tap "Theme" in the Appearance section → Select your preferred theme from the bottom sheet → Changes apply instantly</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            themeSection.appendChild(themeCard);
+            const profileHeader = ui.createSectionHeader(
+                'Profile Screen - Your Control Center',
+                'View your info, edit details, control SMS sending, and customize appearance',
+                'account_circle'
+            );
+            document.getElementById('profile-header').appendChild(profileHeader);
+            const profileFeatures = document.getElementById('profile-features');
+            const profileItems = [
+                {
+                    icon: 'account_box',
+                    title: 'What You See Here',
+                    content: 'Your full name, username, phone number, CNIC, address, and user type. This screen also shows if SMS sending is enabled on this device, any system warnings, and the new Appearance section for theme customization.',
+                    variant: 'default'
+                },
+                {
+                    icon: 'edit',
+                    title: 'Edit Profile Screen',
+                    content: 'Tap the pencil edit icon (usually in the top-right corner) to open the Edit Profile form where you can update your name, phone number, CNIC, and address. Tap the "Save" button to confirm changes and return to the Profile screen.',
+                    variant: 'success'
+                }
+            ];
+            profileItems.forEach(item => {
+                const profileCard = ui.createInfoCard(
+                    item.icon,
+                    item.title,
+                    item.content,
+                    item.variant
+                );
+                profileFeatures.appendChild(profileCard);
+            });
+            const smsToggleBanner = document.getElementById('sms-toggle-banner');
+            const toggleCard = document.createElement('div');
+            toggleCard.className = 'card';
+            toggleCard.innerHTML = `
+                <div style="display: flex; align-items: flex-start; gap: 1.5rem;">
+                    <div class="icon-box" style="background: var(--warning-container); flex-shrink: 0;">
+                        <span class="material-symbols-rounded" style="color: var(--warning); font-size: 28px;">toggle_on</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="margin: 0 0 1rem 0; color: var(--warning);">SMS Reminders Toggle - The Most Important Control</h3>
+                        <p style="margin-bottom: 1.5rem; color: var(--on-surface-variant);">This toggle switch controls whether THIS device sends SMS reminders. Tap the toggle to switch between ON (blue) and OFF (gray). Only one device can be active at a time. When you turn it ON, it automatically turns OFF on all other devices logged into the same account.</p>
+                        <div style="background: var(--info-container); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--info); margin-bottom: 1.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <span class="material-symbols-rounded" style="color: var(--info); font-size: 20px;">warning</span>
+                                <h4 style="margin: 0; color: var(--info); font-weight: 600;">Prerequisite Warning Banner</h4>
+                            </div>
+                            <p style="margin: 0; color: var(--on-surface-variant); line-height: 1.5;">If the app detects a problem that prevents SMS sending (like Airplane Mode being on or missing SMS permissions), a banner will appear at the top of the Profile screen. This banner clearly states the specific problem and includes a "Fix Now" button that takes you directly to the phone's settings to resolve it.</p>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--primary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--primary); font-size: 20px;">cloud_sync</span>
+                                <div>
+                                    <strong style="color: var(--primary);">How It Works:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Since all data is in the cloud, you can be logged in on multiple phones. However, only <strong>one device</strong> can be the designated sender.</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--secondary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--secondary); font-size: 20px;">security</span>
+                                <div>
+                                    <strong style="color: var(--secondary);">System Checks:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">When enabled, the app verifies SMS permission, SIM card status, default SIM settings, and network connectivity.</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--tertiary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--tertiary); font-size: 20px;">power_settings_new</span>
+                                <div>
+                                    <strong style="color: var(--tertiary);">Manual Control:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">You can tap the toggle to switch it OFF at any time to stop your phone from sending reminders. Signing out of the app automatically disables it on that device.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            smsToggleBanner.appendChild(toggleCard);
+        });
+    </script>
+</body>
+</html>

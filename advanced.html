@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced & Technical - RelayBill User Guide</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <meta name="description" content="Advanced features and technical information for RelayBill, including debug user capabilities and system administration.">
+</head>
+<body>
+    <div id="header-container"></div>
+    <main class="main-content">
+        <div class="container">
+            <div id="page-header" class="mb-4"></div>
+            <section class="mb-5">
+                <div id="debug-header" class="mb-4"></div>
+                <div class="card mb-4" id="debug-intro-card"></div>
+                <div id="debug-features-header" class="mb-4"></div>
+                <div class="grid grid-3" id="debug-features-grid"></div>
+            </section>
+        </div>
+    </main>
+    <div id="footer-container"></div>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageHeader = ui.createSectionHeader(
+                'Debug User & Troubleshooting',
+                'Special debug account and system diagnostics',
+                'bug_report'
+            );
+            document.getElementById('page-header').appendChild(pageHeader);
+            const debugHeader = ui.createSectionHeader(
+                'Debug User Account',
+                'Special testing account with unique capabilities',
+                'engineering'
+            );
+            document.getElementById('debug-header').appendChild(debugHeader);
+            const debugIntroCard = document.getElementById('debug-intro-card');
+            debugIntroCard.innerHTML = `
+                <div style="display: flex; align-items: flex-start; gap: 1.5rem;">
+                    <div class="icon-box" style="background: var(--warning-container); flex-shrink: 0;">
+                        <span class="material-symbols-rounded" style="color: var(--warning); font-size: 28px;">bug_report</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="margin: 0 0 1rem 0; color: var(--warning);">What is <code>debug_user</code>?</h3>
+                        <p style="margin-bottom: 1.5rem; color: var(--on-surface-variant);"><code>debug_user</code> is a special testing account that exists in your Firebase database. It's used for testing SMS functionality without affecting real customer data.</p>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--primary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--primary); font-size: 20px;">science</span>
+                                <div>
+                                    <strong style="color: var(--primary);">Testing Purpose:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Used by developers and admins to test SMS sending without creating real customer records</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--secondary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--secondary); font-size: 20px;">database</span>
+                                <div>
+                                    <strong style="color: var(--secondary);">In Your Database:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Exists as a user record in Firebase with special permissions for testing features</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: var(--tertiary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--tertiary); font-size: 20px;">security</span>
+                                <div>
+                                    <strong style="color: var(--tertiary);">Access Level:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Only accessible to administrators and developers - not for regular users</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            `;
+            const debugFeaturesHeader = ui.createSectionHeader(
+                'Debug Menu Features',
+                'Enhanced diagnostic tools with intelligent validation and sorting',
+                'build_circle'
+            );
+            document.getElementById('debug-features-header').appendChild(debugFeaturesHeader);
+            const debugFeaturesGrid = document.getElementById('debug-features-grid');
+            const debugFeatures = [
+                {
+                    icon: 'health_and_safety',
+                    title: 'Pre-flight Check',
+                    description: 'Shows a real-time status of all SMS requirements with intelligent sorting - failing checks appear first for quick problem identification. Includes permissions, SIM status, airplane mode, internet connection, and network connectivity.',
+                    details: 'Enhanced with smart sorting that prioritizes failing items at the top of the list, making troubleshooting faster and more efficient. Tap the refresh icon to update status in real-time.',
+                    variant: 'primary'
+                },
+                {
+                    icon: 'preview',
+                    title: 'SMS Template Preview',
+                    description: 'Allows you to see exactly what an SMS reminder will look like for a specific customer without actually sending the message.',
+                    details: 'Perfect for testing message formatting, customer name substitution, and template customization before going live.',
+                    variant: 'secondary'
+                },
+                {
+                    icon: 'play_circle',
+                    title: 'Trigger Workers',
+                    description: 'Manually start background tasks with intelligent validation - workers only trigger if prerequisites are met. Includes billing worker, reminder notifications, and promotional notifications.',
+                    details: 'Enhanced with prerequisite validation that prevents triggering workers when SMS permissions or SIM requirements are not met. When a worker is triggered, feedback (like success or error messages) appears in an info bottom sheet that slides up from the bottom of the screen.',
+                    variant: 'warning'
+                }
+            ];
+            const mainCard = document.createElement('div');
+            mainCard.className = 'card';
+            let featuresHTML = '';
+            debugFeatures.forEach((feature, index) => {
+                featuresHTML += `
+                    <div style="display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.5rem; ${index < debugFeatures.length - 1 ? 'border-bottom: 1px solid var(--outline-variant);' : ''} margin-bottom: ${index < debugFeatures.length - 1 ? '0' : '0'};">
+                        <div class="icon-box" style="background: var(--${feature.variant}-container); flex-shrink: 0; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                            <span class="material-symbols-rounded" style="color: var(--${feature.variant}); font-size: 32px;">${feature.icon}</span>
+                        </div>
+                        <div style="flex: 1;">
+                            <h3 style="margin: 0 0 0.75rem 0; color: var(--${feature.variant}); font-size: 1.25rem;">${feature.title}</h3>
+                            <p style="margin: 0 0 1rem 0; color: var(--on-surface-variant); line-height: 1.5;">${feature.description}</p>
+                            <div style="background: var(--${feature.variant}-container); padding: 0.75rem 1rem; border-radius: 8px; border-left: 4px solid var(--${feature.variant});">
+                                <p style="margin: 0; font-size: 0.875rem; color: var(--on-surface-variant); line-height: 1.4; font-style: italic;">${feature.details}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            mainCard.innerHTML = `
+                <div style="padding: 0;">
+                    ${featuresHTML}
+                </div>
+            `;
+            debugFeaturesGrid.appendChild(mainCard);
+        });
+    </script>
+</body>
+</html>

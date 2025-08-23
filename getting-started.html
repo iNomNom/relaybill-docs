@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - RelayBill User Guide</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <meta name="description" content="Complete step-by-step guide to setting up RelayBill for automated SMS payment reminders.">
+</head>
+<body>
+    <div id="header-container"></div>
+    <main class="main-content">
+        <div class="container">
+            <div id="page-header" class="mb-4"></div>
+            <section class="mb-5">
+                <div id="permissions-header" class="mb-4"></div>
+                <div class="grid grid-3" id="permissions-grid"></div>
+            </section>
+            <section class="mb-5">
+                <div id="login-header" class="mb-4"></div>
+                <div class="card" id="login-card"></div>
+            </section>
+        </div>
+    </main>
+    <div id="footer-container"></div>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageHeader = ui.createSectionHeader(
+                'Getting Started Guide',
+                'Step-by-step setup from installation to first SMS',
+                'rocket_launch'
+            );
+            document.getElementById('page-header').appendChild(pageHeader);
+            const permissionsHeader = ui.createSectionHeader(
+                'Step 1: Grant Required Permissions',
+                'The app needs these permissions to work properly',
+                'security'
+            );
+            document.getElementById('permissions-header').appendChild(permissionsHeader);
+            const permissionsGrid = document.getElementById('permissions-grid');
+            const permissions = [
+                {
+                    icon: 'sms',
+                    title: 'SMS Permission',
+                    description: 'Required to send payment reminders to your customers.',
+                    details: 'SEND_SMS permission is essential for the automated reminder feature.',
+                    variant: 'default'
+                },
+                {
+                    icon: 'phone',
+                    title: 'Phone State Permission',
+                    description: 'Required to check if a SIM card is active and if a default SIM is selected for sending messages.',
+                    details: 'READ_PHONE_STATE is crucial for devices with dual SIMs.',
+                    variant: 'success'
+                },
+                {
+                    icon: 'notifications',
+                    title: 'Notifications Permission',
+                    description: 'Required to alert you if there are issues with the automated SMS sending process.',
+                    details: 'POST_NOTIFICATIONS helps you stay informed about permission issues.',
+                    variant: 'warning'
+                }
+            ];
+            permissions.forEach(permission => {
+                const permissionCard = document.createElement('div');
+                permissionCard.className = 'card';
+                permissionCard.style.textAlign = 'center';
+                permissionCard.style.display = 'flex';
+                permissionCard.style.flexDirection = 'column';
+                permissionCard.style.height = '100%';
+                permissionCard.innerHTML = `
+                    <div class="icon-box" style="margin-bottom: 1.5rem; background: var(--${permission.variant === 'default' ? 'primary' : permission.variant}-container);">
+                        <span class="material-symbols-rounded" style="color: var(--${permission.variant === 'default' ? 'primary' : permission.variant}); font-size: 28px;">${permission.icon}</span>
+                    </div>
+                    <h3 style="margin-bottom: 1rem; color: var(--${permission.variant === 'default' ? 'primary' : permission.variant});">${permission.title}</h3>
+                    <p style="margin-bottom: 1rem; color: var(--on-surface-variant); flex: 1;">${permission.description}</p>
+                    <div style="padding: 0.75rem; background: var(--surface-variant); border-radius: 8px; font-size: 0.875rem; color: var(--on-surface-variant); margin-top: auto;">
+                        ${permission.details}
+                    </div>
+                `;
+                permissionsGrid.appendChild(permissionCard);
+            });
+            const loginHeader = ui.createSectionHeader(
+                'Step 2: Log In With Your Credentials',
+                'Use the username and password given by your admin',
+                'login'
+            );
+            document.getElementById('login-header').appendChild(loginHeader);
+            const loginCard = document.getElementById('login-card');
+            loginCard.innerHTML = `
+                <div style="display: flex; align-items: flex-start; gap: 1.5rem;">
+                    <div class="icon-box" style="background: var(--tertiary-container); flex-shrink: 0;">
+                        <span class="material-symbols-rounded" style="color: var(--tertiary); font-size: 28px;">account_circle</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="margin: 0 0 1rem 0; color: var(--tertiary);">What You Need to Do</h3>
+                        <p style="margin-bottom: 1.5rem; color: var(--on-surface-variant);">When you first open the app, you'll see a login screen with two text input fields and a blue "Login" button. Enter the username and password your administrator gave you. Tap the Login button to authenticate. If credentials are correct, the app automatically navigates to the Customer screen showing your customer list.</p>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--primary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--primary); font-size: 20px;">person</span>
+                                <div>
+                                    <strong style="color: var(--primary);">Username Field:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Enter your assigned username</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--secondary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--secondary); font-size: 20px;">lock</span>
+                                <div>
+                                    <strong style="color: var(--secondary);">Password Field:</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Enter your secure password</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: var(--success-container); border-radius: 8px; border-left: 4px solid var(--success);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <span class="material-symbols-rounded" style="color: var(--success); font-size: 18px;">check_circle</span>
+                                <strong style="color: var(--success);">Next Steps</strong>
+                            </div>
+                            <p style="margin: 0; font-size: 0.875rem; color: var(--on-surface-variant);">After logging in, tap the Profile tab at the bottom of the screen. Find the "SMS Reminders" toggle switch and tap it to turn it ON (it will change from gray to blue). This enables automatic reminders from this device. Then return to the Customer screen and tap the blue "+" floating action button to add your first customer and test the system.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

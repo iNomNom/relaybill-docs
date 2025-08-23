@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ & Troubleshooting - RelayBill User Guide</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <meta name="description" content="Frequently asked questions and troubleshooting guide for RelayBill SMS reminder system.">
+</head>
+<body>
+    <div id="header-container"></div>
+    <main class="main-content">
+        <div class="container">
+            <div id="page-header" class="mb-4"></div>
+            <section class="mb-5">
+                <div id="faq-accordion"></div>
+            </section>
+        </div>
+    </main>
+    <div id="footer-container"></div>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageHeader = ui.createSectionHeader(
+                'FAQ & Troubleshooting',
+                'Common issues, solutions, and admin capabilities',
+                'help_center'
+            );
+            document.getElementById('page-header').appendChild(pageHeader);
+            const faqItems = [
+                {
+                    title: 'Why are my SMS reminders not sending?',
+                    content: `
+                        <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+                            <div class="icon-box" style="background: var(--error-container); flex-shrink: 0;">
+                                <span class="material-symbols-rounded" style="color: var(--error); font-size: 28px;">sms_failed</span>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 style="margin: 0 0 0.5rem 0; color: var(--error);">Most Common Issue</h4>
+                                <p style="margin-bottom: 1.5rem; color: var(--on-surface-variant);">Follow this troubleshooting checklist to identify and resolve SMS delivery problems.</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2rem;">
+                            <div style="background: var(--primary-container); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="background: var(--primary); border-radius: 50%; padding: 0.75rem; display: flex; align-items: center; justify-content: center;">
+                                        <span class="material-symbols-rounded" style="color: white; font-size: 24px;">toggle_on</span>
+                                    </div>
+                                    <h5 style="margin: 0; color: var(--primary); font-weight: 600;">Check SMS Toggle</h5>
+                                </div>
+                                <p style="margin: 0; color: var(--on-surface-variant); line-height: 1.5;">Check the "SMS Reminders" toggle on the Profile screen - it should be ON (blue)</p>
+                            </div>
+                            <div style="background: var(--secondary-container); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="background: var(--secondary); border-radius: 50%; padding: 0.75rem; display: flex; align-items: center; justify-content: center;">
+                                        <span class="material-symbols-rounded" style="color: white; font-size: 24px;">warning</span>
+                                    </div>
+                                    <h5 style="margin: 0; color: var(--secondary); font-weight: 600;">Check Warning Messages</h5>
+                                </div>
+                                <p style="margin: 0; color: var(--on-surface-variant); line-height: 1.5;">Look for red or orange warning banners at the top of the Profile screen - they explain specific issues</p>
+                            </div>
+                            <div style="background: var(--tertiary-container); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="background: var(--tertiary); border-radius: 50%; padding: 0.75rem; display: flex; align-items: center; justify-content: center;">
+                                        <span class="material-symbols-rounded" style="color: white; font-size: 24px;">smartphone</span>
+                                    </div>
+                                    <h5 style="margin: 0; color: var(--tertiary); font-weight: 600;">Check Phone Settings</h5>
+                                </div>
+                                <p style="margin: 0; color: var(--on-surface-variant); line-height: 1.5;">Ensure SMS permissions, default SMS app, and internet connection are properly configured</p>
+                            </div>
+                        </div>
+                        <div style="background: var(--info-container); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--info); margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <span class="material-symbols-rounded" style="color: var(--info); font-size: 20px;">lightbulb</span>
+                                <h6 style="margin: 0; color: var(--info); font-weight: 600;">Quick Fix</h6>
+                            </div>
+                            <p style="margin: 0; color: var(--on-surface-variant); line-height: 1.5;">Toggle the SMS Reminders switch OFF and then ON again to force the app to re-check all necessary settings, which can often solve the problem</p>
+                        </div>
+                    `
+                },
+                {
+                    title: 'How do I transfer RelayBill to a new phone?',
+                    content: `
+                        <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+                            <div class="icon-box" style="background: var(--success-container); flex-shrink: 0;">
+                                <span class="material-symbols-rounded" style="color: var(--success); font-size: 28px;">smartphone</span>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 style="margin: 0 0 0.5rem 0; color: var(--success);">Simple Transfer Process</h4>
+                                <p style="margin-bottom: 1.5rem; color: var(--on-surface-variant);">Transferring RelayBill to a new device is straightforward and automatic.</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2rem;">
+                                <div style="background: var(--primary-container); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                        <div style="background: var(--primary); border-radius: 50%; padding: 0.75rem; display: flex; align-items: center; justify-content: center;">
+                                            <span class="material-symbols-rounded" style="color: white; font-size: 24px;">smartphone</span>
+                                        </div>
+                                        <h5 style="margin: 0; color: var(--primary); font-weight: 600;">Step 1: Install & Login</h5>
+                                    </div>
+                                    <p style="margin: 0; color: var(--on-surface-variant); line-height: 1.5;">Download RelayBill on your new phone and log in with your existing credentials.</p>
+                                </div>
+                                <div style="background: var(--secondary-container); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                        <div style="background: var(--secondary); border-radius: 50%; padding: 0.75rem; display: flex; align-items: center; justify-content: center;">
+                                            <span class="material-symbols-rounded" style="color: white; font-size: 24px;">toggle_on</span>
+                                        </div>
+                                        <h5 style="margin: 0; color: var(--secondary); font-weight: 600;">Step 2: Enable SMS</h5>
+                                    </div>
+                                    <p style="margin: 0; color: var(--on-surface-variant); line-height: 1.5;">Go to Profile screen and turn ON the "SMS Reminders" toggle.</p>
+                                </div>
+                                <div style="background: var(--tertiary-container); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                        <div style="background: var(--tertiary); border-radius: 50%; padding: 0.75rem; display: flex; align-items: center; justify-content: center;">
+                                            <span class="material-symbols-rounded" style="color: white; font-size: 24px;">check_circle</span>
+                                        </div>
+                                        <h5 style="margin: 0; color: var(--tertiary); font-weight: 600;">Step 3: Automatic Transfer</h5>
+                                    </div>
+                                    <p style="margin: 0; color: var(--on-surface-variant); line-height: 1.5;">Your old device will automatically be disabled. Only one device can send SMS at a time.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    title: 'Is it safe to delete customers? Can I recover them?',
+                    content: `
+                        <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+                            <div class="icon-box" style="background: var(--error-container); flex-shrink: 0;">
+                                <span class="material-symbols-rounded" style="color: var(--error); font-size: 28px;">delete_forever</span>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 style="margin: 0 0 0.5rem 0; color: var(--error);">Customer Deletion Safety</h4>
+                                <p style="margin-bottom: 1.5rem; color: var(--on-surface-variant);">The app includes safety measures to prevent accidental customer deletions, but deleted customers cannot be recovered.</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2rem;">
+                            <div style="background: var(--error-container); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="background: var(--error); border-radius: 50%; padding: 0.75rem; display: flex; align-items: center; justify-content: center;">
+                                        <span class="material-symbols-rounded" style="color: white; font-size: 24px;">delete_forever</span>
+                                    </div>
+                                    <h5 style="margin: 0; color: var(--error); font-weight: 600;">Confirmation Required</h5>
+                                </div>
+                                <p style="margin: 0; color: var(--on-surface-variant); line-height: 1.5;">When you tap delete, the app will ask: "Are you sure you want to delete [Customer Name]? This action cannot be undone and all customer data will be permanently removed."</p>
+                            </div>
+                            <div style="background: var(--warning-container); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="background: var(--warning); border-radius: 50%; padding: 0.75rem; display: flex; align-items: center; justify-content: center;">
+                                        <span class="material-symbols-rounded" style="color: white; font-size: 24px;">warning</span>
+                                    </div>
+                                    <h5 style="margin: 0; color: var(--warning); font-weight: 600;">Permanent Deletion</h5>
+                                </div>
+                                <p style="margin: 0; color: var(--on-surface-variant); line-height: 1.5;">Once confirmed, the customer is permanently removed from Firebase database and cannot be recovered.</p>
+                            </div>
+                            <div style="background: var(--info-container); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="background: var(--info); border-radius: 50%; padding: 0.75rem; display: flex; align-items: center; justify-content: center;">
+                                        <span class="material-symbols-rounded" style="color: white; font-size: 24px;">info</span>
+                                    </div>
+                                    <h5 style="margin: 0; color: var(--info); font-weight: 600;">No Recovery Option</h5>
+                                </div>
+                                <p style="margin: 0; color: var(--on-surface-variant); line-height: 1.5;">There is no "undo" feature for deleted customers. If you accidentally delete someone, you'll need to manually re-add their information.</p>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    title: 'Why are customers not syncing between devices?',
+                    content: `
+                        <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+                            <div class="icon-box" style="background: var(--warning-container); flex-shrink: 0;">
+                                <span class="material-symbols-rounded" style="color: var(--warning); font-size: 28px;">sync_problem</span>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 style="margin: 0 0 0.5rem 0; color: var(--warning);">Sync Issues</h4>
+                                <p style="margin-bottom: 1.5rem; color: var(--on-surface-variant);">This is usually caused by a poor internet connection on one of the devices.</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2rem;">
+                            <div style="background: var(--primary-container); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="background: var(--primary); border-radius: 50%; padding: 0.75rem; display: flex; align-items: center; justify-content: center;">
+                                        <span class="material-symbols-rounded" style="color: white; font-size: 24px;">refresh</span>
+                                    </div>
+                                    <h5 style="margin: 0; color: var(--primary); font-weight: 600;">Manual Sync</h5>
+                                </div>
+                                <p style="margin: 0; color: var(--on-surface-variant); line-height: 1.5;">Perform a pull-to-refresh by swiping down from the top of the Customer screen to manually force a sync with the cloud database.</p>
+                            </div>
+                        </div>
+                        <div style="background: var(--info-container); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--info); margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <span class="material-symbols-rounded" style="color: var(--info); font-size: 20px;">wifi</span>
+                                <h6 style="margin: 0; color: var(--info); font-weight: 600;">Internet Connection</h6>
+                            </div>
+                            <p style="margin: 0; color: var(--on-surface-variant); line-height: 1.5;">Ensure both devices have a stable internet connection. Poor connectivity can prevent proper synchronization with the cloud database.</p>
+                        </div>
+                    `
+                },
+                {
+                    title: 'How can I change the app theme?',
+                    content: `
+                        <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+                            <div class="icon-box" style="background: var(--secondary-container); flex-shrink: 0;">
+                                <span class="material-symbols-rounded" style="color: var(--secondary); font-size: 28px;">palette</span>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 style="margin: 0 0 0.5rem 0; color: var(--secondary);">Appearance Customization</h4>
+                                <p style="margin-bottom: 1.5rem; color: var(--on-surface-variant);">RelayBill offers three theme options to match your preference and device settings.</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1.5rem; background: var(--primary-container); border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <span class="material-symbols-rounded" style="color: var(--primary); font-size: 20px;">light_mode</span>
+                                <div>
+                                    <strong style="color: var(--primary);">Light Theme</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Bright interface with light backgrounds</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1.5rem; background: var(--secondary-container); border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <span class="material-symbols-rounded" style="color: var(--secondary); font-size: 20px;">dark_mode</span>
+                                <div>
+                                    <strong style="color: var(--secondary);">Dark Theme</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Dark interface that's easier on the eyes</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1.5rem; background: var(--tertiary-container); border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <span class="material-symbols-rounded" style="color: var(--tertiary); font-size: 20px;">settings</span>
+                                <div>
+                                    <strong style="color: var(--tertiary);">System Default (Recommended)</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Follows your device's system theme setting</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding: 1.5rem; background: var(--info-container); border-radius: 12px; border-left: 4px solid var(--info); box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <span class="material-symbols-rounded" style="color: var(--info); font-size: 18px;">touch_app</span>
+                                <strong style="color: var(--info);">How to Change</strong>
+                            </div>
+                            <p style="margin: 0; font-size: 0.875rem; color: var(--on-surface-variant);">Profile screen → Appearance section → Choose Light, Dark, or System Default. Your choice is automatically saved and persists across app restarts.</p>
+                        </div>
+                    `
+                },
+                {
+                    title: 'Why does the app theme change automatically sometimes?',
+                    content: `
+                        <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+                            <div class="icon-box" style="background: var(--info-container); flex-shrink: 0;">
+                                <span class="material-symbols-rounded" style="color: var(--info); font-size: 28px;">auto_mode</span>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 style="margin: 0 0 0.5rem 0; color: var(--info);">System Default Behavior</h4>
+                                <p style="margin-bottom: 1.5rem; color: var(--on-surface-variant);">If you have "System Default" selected (which is the default setting), the app automatically follows your phone's system theme preferences.</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--primary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--primary); font-size: 20px;">schedule</span>
+                                <div>
+                                    <strong style="color: var(--primary);">Time-Based Switching</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">If your phone is set to switch themes based on time (e.g., dark at sunset), RelayBill will follow this schedule</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--secondary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--secondary); font-size: 20px;">settings</span>
+                                <div>
+                                    <strong style="color: var(--secondary);">System Settings Change</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">When you change your phone's system theme in Android settings, RelayBill updates to match</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding: 1rem; background: var(--success-container); border-radius: 8px; border-left: 4px solid var(--success);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <span class="material-symbols-rounded" style="color: var(--success); font-size: 18px;">lock</span>
+                                <strong style="color: var(--success);">Override System Default</strong>
+                            </div>
+                            <p style="margin: 0; font-size: 0.875rem; color: var(--on-surface-variant);">To stop automatic theme changes, go to Profile → Appearance → Theme and select either "Light" or "Dark" instead of "System Default"</p>
+                        </div>
+                    `
+                },
+                {
+                    title: 'What are the enhanced SMS prerequisite warnings?',
+                    content: `
+                        <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+                            <div class="icon-box" style="background: var(--warning-container); flex-shrink: 0;">
+                                <span class="material-symbols-rounded" style="color: var(--warning); font-size: 28px;">warning</span>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 style="margin: 0 0 0.5rem 0; color: var(--warning);">Smarter Warning System</h4>
+                                <p style="margin-bottom: 1.5rem; color: var(--on-surface-variant);">The app now provides more specific warnings about why SMS reminders are disabled, with intelligent detection of airplane mode and internet connection issues.</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--error-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--error); font-size: 20px;">airplanemode_active</span>
+                                <div>
+                                    <strong style="color: var(--error);">Airplane Mode Detection</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Warning banner specifically tells you "Airplane mode is currently on" when detected</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--error-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--error); font-size: 20px;">cloud_off</span>
+                                <div>
+                                    <strong style="color: var(--error);">Internet Connection Check</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Warning banner shows "No internet connection available" when network issues are detected</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--warning-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--warning); font-size: 20px;">sim_card_alert</span>
+                                <div>
+                                    <strong style="color: var(--warning);">SIM Card Status</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Specific messages for "No SIM card is detected" and "No default SMS SIM is selected" issues</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--primary-container); border-radius: 8px;">
+                                <span class="material-symbols-rounded" style="color: var(--primary); font-size: 20px;">block</span>
+                                <div>
+                                    <strong style="color: var(--primary);">Permission Issues</strong>
+                                    <div style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.25rem;">Clear message when "SMS permission was revoked" is detected</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding: 1rem; background: var(--success-container); border-radius: 8px; border-left: 4px solid var(--success);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <span class="material-symbols-rounded" style="color: var(--success); font-size: 18px;">build</span>
+                                <strong style="color: var(--success);">Quick Fix Action</strong>
+                            </div>
+                            <p style="margin: 0; font-size: 0.875rem; color: var(--on-surface-variant);">Each warning banner includes a "Fix Now" button that guides you to the appropriate settings or actions to resolve the specific issue detected.</p>
+                        </div>
+                    `
+                }
+            ];
+            const faqAccordion = ui.createAccordion(faqItems);
+            document.getElementById('faq-accordion').appendChild(faqAccordion);
+        });
+    </script>
+</body>
+</html>

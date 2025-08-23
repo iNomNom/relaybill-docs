@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RelayBill User Guide - Home</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <meta name="description" content="RelayBill User Guide - Learn how to manage your ISP customers and automate SMS payment reminders.">
+</head>
+<body>
+    <div id="header-container"></div>
+    <main class="main-content">
+        <div class="container">
+            <div id="hero-section"></div>
+            <section class="mb-5">
+                <div id="navigation-header" class="mb-4"></div>
+                <div class="grid grid-3" id="navigation-grid"></div>
+            </section>
+            <section class="mb-5">
+                <div id="cloud-header" class="mb-4"></div>
+                <div class="grid grid-2" id="cloud-grid"></div>
+            </section>
+            <section class="mb-5">
+                <div id="sms-header" class="mb-4"></div>
+                <div class="grid grid-2" id="sms-grid"></div>
+            </section>
+        </div>
+    </main>
+    <div id="footer-container"></div>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroSection = ui.createHeroSection(
+                'RelayBill User Guide',
+                'Learn how to use your ISP customer management app',
+                'This guide shows you exactly what you see on each screen, how to use every feature, what to do when things go wrong, and how administrators manage the system. Your data lives in Firebase cloud, you can use multiple devices, but only one sends SMS.',
+                {
+                    text: 'Learn the Screens',
+                    icon: 'smartphone',
+                    href: 'features.html'
+                },
+                {
+                    text: 'Fix Issues',
+                    icon: 'build',
+                    href: 'faq.html'
+                }
+            );
+            document.getElementById('hero-section').appendChild(heroSection);
+            const navigationHeader = ui.createSectionHeader(
+                'App Screens You\'ll Use',
+                'What you see and what you can do on each screen',
+                'smartphone'
+            );
+            document.getElementById('navigation-header').appendChild(navigationHeader);
+            const navigationGrid = document.getElementById('navigation-grid');
+            const navigationSections = [
+                {
+                    icon: 'group',
+                    title: 'Customer Screen',
+                    description: 'View all customers, search by name, filter by status (Active/Terminated), add new customers, edit existing ones. This is your main workspace.',
+                    link: 'features.html#customers'
+                },
+                {
+                    icon: 'sms_failed',
+                    title: 'Failed SMS Screen (Alerts)',
+                    description: 'See which SMS reminders couldn\'t be sent and why. Retry failed messages or mark them as handled. Your troubleshooting center.',
+                    link: 'features.html#alerts'
+                },
+                {
+                    icon: 'account_circle',
+                    title: 'Profile Screen',
+                    description: 'View your info, edit your details, and control SMS sending. Turn reminders on/off for this device. See system warnings here.',
+                    link: 'features.html#profile'
+                }
+            ];
+            navigationSections.forEach(section => {
+                const sectionCard = ui.createFeatureCard(
+                    section.icon,
+                    section.title,
+                    section.description,
+                    section.link
+                );
+                navigationGrid.appendChild(sectionCard);
+            });
+            const cloudHeader = ui.createSectionHeader(
+                'How Your Data Works',
+                'Firebase cloud storage with admin control',
+                'cloud_sync'
+            );
+            document.getElementById('cloud-header').appendChild(cloudHeader);
+            const cloudGrid = document.getElementById('cloud-grid');
+            const cloudFeatures = [
+                {
+                    icon: 'devices',
+                    title: 'Multiple Device Access',
+                    content: 'Log in on any Android device to see your customers. Your data syncs instantly. But remember: only ONE device can send SMS reminders at a time. Switch devices anytime by enabling SMS on the new one.',
+                    variant: 'default'
+                },
+                {
+                    icon: 'admin_panel_settings',
+                    title: 'Admin Can Change Everything',
+                    content: 'Your admin can update SMS message templates, modify customer data, create new user accounts, and change system settings. Changes happen immediately - no app updates needed.',
+                    variant: 'success'
+                }
+            ];
+            cloudFeatures.forEach(feature => {
+                const featureCard = ui.createInfoCard(
+                    feature.icon,
+                    feature.title,
+                    feature.content,
+                    feature.variant
+                );
+                cloudGrid.appendChild(featureCard);
+            });
+            const smsHeader = ui.createSectionHeader(
+                'SMS Messages Customers Receive',
+                'What your customers see when reminders are sent',
+                'message'
+            );
+            document.getElementById('sms-header').appendChild(smsHeader);
+            const smsGrid = document.getElementById('sms-grid');
+            const threeDayReminder = document.createElement('div');
+            threeDayReminder.className = 'card';
+            threeDayReminder.innerHTML = `
+                <div class="card-header">
+                    <div class="icon-box" style="background: var(--warning-container);">
+                        <span class="material-symbols-rounded" style="color: var(--warning);">schedule</span>
+                    </div>
+                    <h3 style="color: var(--warning);">Three Days Before Expiry</h3>
+                </div>
+                <div style="background: var(--surface-variant); padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.875rem; line-height: 1.4; border-left: 4px solid var(--warning);">
+                    <div style="margin-bottom: 1rem;">Dear {name},<br>
+Your service package will expire in 3 days. Please pay your bill within the next 3 days to continue enjoying uninterrupted service.<br><br>
+Thank you.</div>
+                    <div style="direction: rtl; text-align: right;">پیارے صارف،<br>
+آپ کا سروس پیکج 3 دنوں میں ختم ہو جائے گا۔ بلاتعطل سروس سے لطف اندوز ہوتے رہنے کے لیے براہ کرم اگلے 3 دنوں کے اندر اپنا بل ادا کریں۔<br><br>
+شکریہ</div>
+                </div>
+            `;
+            smsGrid.appendChild(threeDayReminder);
+            const expiryDayReminder = document.createElement('div');
+            expiryDayReminder.className = 'card';
+            expiryDayReminder.innerHTML = `
+                <div class="card-header">
+                    <div class="icon-box" style="background: var(--error-container);">
+                        <span class="material-symbols-rounded" style="color: var(--error);">today</span>
+                    </div>
+                    <h3 style="color: var(--error);">On Expiry Day</h3>
+                </div>
+                <div style="background: var(--surface-variant); padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.875rem; line-height: 1.4; border-left: 4px solid var(--error);">
+                    <div style="margin-bottom: 1rem;">Dear {name},<br>
+Your service package will expire today. Please pay your bill today to continue enjoying uninterrupted service.<br><br>
+Thank you.</div>
+                    <div style="direction: rtl; text-align: right;">پیارے صارف، آپ کا سروس پیکج آج ختم ہو جائے گا۔ بلاتعطل سروس سے لطف اندوز ہوتے رہنے کے لیے براہ کرم آج ہی اپنا بل ادا کریں۔ شکریہ</div>
+                </div>
+            `;
+            smsGrid.appendChild(expiryDayReminder);
+        });
+    </script>
+</body>
+</html>
